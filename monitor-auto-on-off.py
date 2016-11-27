@@ -12,14 +12,16 @@ lastsignaled = 0
 while True:
     now = time.time()
     if GPIO.input(PIR):
-        if not displayison:
-				subprocess.call('/opt/vc/bin/tvservice -p', shell=True)
-               	subprocess.call('xset dpms force on', shell=True)
-               	displayison = True
-               	lastsignaled = now
+         lastsignaled = now
+         if not displayison:
+            subprocess.call('/opt/vc/bin/tvservice -p', shell=True)
+            subprocess.call('xset dpms force on', shell=True)
+            displayison = True
+            print('Display on')
     else:
         if now-lastsignaled > maxidle:
             if displayison:
-                subprocess.call('/opt/vc/bin/tvservice -o', shell=True)
-                displayison = False
+               subprocess.call('/opt/vc/bin/tvservice -o', shell=True)
+               displayison = False
+               print('Display off')
     time.sleep(1)
