@@ -7,7 +7,7 @@ PIR = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIR, GPIO.IN)
 displayison = False
-maxidle = 10 # seconds
+maxidle = 2*60 # seconds
 lastsignaled = 0
 while True:
     now = time.time()
